@@ -3,9 +3,10 @@ import React, { useEffect, useState } from "react";
 import CarStandFooterComponent from "../carstand/footer/footer";
 import CarStandHeroComponent from "../carstand/hero/hero";
 import CarStandNavbarComponent from "../carstand/navbar/navbar";
+import CarStandTopCarsComponent from "../carstand/topcars/top-cars";
 import simpsons from "/assets/video/simpsons.mp4";
 import styles from "../../../src/styles/laptop/laptop-screen.module.scss";
-import {  sRGBEncoding } from "three";
+import { sRGBEncoding } from "three";
 
 export default function LaptopScreenComponent(props) {
   const [video] = useState(() => {
@@ -13,7 +14,6 @@ export default function LaptopScreenComponent(props) {
     vid.src = simpsons;
     vid.loop = true;
     vid.muted = true;
-    vid.id = 'simpsons'
     vid.play();
     return vid;
   });
@@ -21,18 +21,10 @@ export default function LaptopScreenComponent(props) {
   const [episode, setDisplayEpisode] = useState(false);
 
   useEffect(() => {
-    if(episode) {
-
-
+    if (episode) {
       props.allowMovement(true);
-
-      /* document.querySelector('#simpsons').addEventListener('click', function() {
-        video.muted = false;
-      }); */
-
-
     }
-  })
+  });
 
   return (
     <mesh rotation={[1.565, 0, 0]} position={[0, 0, 0.4]}>
@@ -56,9 +48,13 @@ export default function LaptopScreenComponent(props) {
           center
         >
           <div className={styles.sub_container}>
-            <CarStandNavbarComponent displayEpisode={(displayEpisode) => setDisplayEpisode(displayEpisode)}/>
+            <CarStandNavbarComponent
+              displayEpisode={(displayEpisode) =>
+                setDisplayEpisode(displayEpisode)
+              }
+            />
             <CarStandHeroComponent />
-
+            {/*<CarStandTopCarsComponent />*/}
             <CarStandFooterComponent />
           </div>
         </Html>

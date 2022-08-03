@@ -5,17 +5,11 @@
   display: grid;
   justify-items: center;
   justify-content: center;
-
-  padding: 0;
-  margin: 0;
-  overflow-y: scroll;
   overflow-x: hidden;
-  scroll-behavior: smooth;
+  overflow-y: scroll;
 
   .sub_container {
-    padding: 0;
-    margin: 0;
-    max-height: 28px;
+    max-height: 30px;
     text-align: center;
     transform: scale(0.05);
     transform-origin: top center;
