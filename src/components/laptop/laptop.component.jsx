@@ -34,7 +34,7 @@ export default function Laptop(props) {
 
   useEffect(() => {
     if (xRotation === -1.5500000000000007) {
-      props.zoomInToScreen();
+      
       turnOnScreen(true);
     }
   }, [xRotation]);

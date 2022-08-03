@@ -12,18 +12,8 @@ import { Canvas } from "@react-three/fiber";
 import Laptop from "./components/laptop/laptop.component";
 
 function App() {
-  const [zoom, setZoom] = useState(1);
-  const [yPosition, setYPosition] = useState(-1);
 
   const [movement, allowMovement] = useState(false);
-
-  const zoomInToScreen = () => {
-    setZoom(1.5);
-    setYPosition(1);
-  };
-
-
-
 
   return (
     <section className={styles.container}>
@@ -32,7 +22,7 @@ function App() {
       <section className={styles.canvas_container}>
         <Canvas dpr={[1, 2]}>
           <Suspense fallback={"Loading world..."}>
-            <PerspectiveCamera makeDefault position={[0, -1, 0]} zoom = {1}  />
+            <PerspectiveCamera makeDefault position={[0, -1, 0]}  />
 
             {/* Camera controls*/}
             <OrbitControls
@@ -47,7 +37,7 @@ function App() {
             />
             <Environment preset="city" />
 
-            <Laptop zoomInToScreen={() => zoomInToScreen()} allowMovement={(movement) => allowMovement(movement)}  />
+            <Laptop allowMovement={(movement) => allowMovement(movement)}  />
             <ContactShadows position={[0, -1, 0]} opacity={1} width={5} height={5} />
           </Suspense>
         </Canvas>
