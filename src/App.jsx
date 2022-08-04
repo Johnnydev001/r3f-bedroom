@@ -37,7 +37,7 @@ function App() {
               disabled
               enableZoom={snap.allowMovement}
               enableRotate={snap.allowMovement}
-              minDistance={4}
+              minDistance={3.1}
               maxDistance={6}
               enablePan={false}
               rotateSpeed={0.7}
