@@ -7,8 +7,15 @@ import CarStandTopCarsComponent from "../carstand/topcars/top-cars";
 import simpsons from "/assets/video/simpsons.mp4";
 import styles from "../../../src/styles/laptop/laptop-screen.module.scss";
 import { sRGBEncoding } from "three";
+import { state } from "../../App";
+import { useSnapshot } from "valtio";
 
-export default function LaptopScreenComponent(props) {
+export default function LaptopScreenComponent() {
+
+  // Hook for acessing the state data
+  const snap = useSnapshot(state);
+
+  // Simpsons video to be displayed on the screen
   const [video] = useState(() => {
     const vid = document.createElement("video");
     vid.src = simpsons;
@@ -18,18 +25,17 @@ export default function LaptopScreenComponent(props) {
     return vid;
   });
 
-  const [episode, setDisplayEpisode] = useState(false);
-
+  // Allow rotation/zoom when the video is playing
   useEffect(() => {
-    if (episode) {
-      props.allowMovement(true);
+    if (snap.displayEpisode) {
+      state.allowMovement = true;
     }
   });
 
   return (
     <mesh rotation={[1.565, 0, 0]} position={[0, 0, 0.4]}>
       <planeGeometry args={[1.05, 0.7]} />
-      {props.screenTurnedOn && episode && (
+      {snap.screenTurnedOn && snap.displayEpisode && (
         <meshStandardMaterial emissive={"white"}>
           <videoTexture attach="map" args={[video]} encoding={sRGBEncoding} />
           <videoTexture
@@ -39,7 +45,7 @@ export default function LaptopScreenComponent(props) {
           />
         </meshStandardMaterial>
       )}
-      {props.screenTurnedOn && !episode && (
+      {snap.screenTurnedOn && !snap.displayEpisode && (
         <Html
           className={styles.container}
           transform
@@ -48,11 +54,7 @@ export default function LaptopScreenComponent(props) {
           center
         >
           <div className={styles.sub_container}>
-            <CarStandNavbarComponent
-              displayEpisode={(displayEpisode) =>
-                setDisplayEpisode(displayEpisode)
-              }
-            />
+            <CarStandNavbarComponent />
             <CarStandHeroComponent />
             {/*<CarStandTopCarsComponent />*/}
             <CarStandFooterComponent />

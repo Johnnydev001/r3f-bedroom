@@ -4,16 +4,24 @@ import {
   ContactShadows,
   OrbitControls,
   PerspectiveCamera,
-  Environment
+  Environment,
 } from "@react-three/drei";
-import { Suspense, useState } from "react";
+import { Suspense } from "react";
 import { Canvas } from "@react-three/fiber";
-
 import Laptop from "./components/laptop/laptop.component";
+import { proxy, useSnapshot } from "valtio";
+
+// Constant for handling with state changes
+export const state = proxy({
+  screenTurnedOn: false,
+  allowMovement: false,
+  displayEpisode: false,
+});
 
 function App() {
 
-  const [movement, allowMovement] = useState(false);
+  // Hook for acessing the state data
+  const snap = useSnapshot(state);
 
   return (
     <section className={styles.container}>
@@ -22,13 +30,13 @@ function App() {
       <section className={styles.canvas_container}>
         <Canvas dpr={[1, 2]}>
           <Suspense fallback={"Loading world..."}>
-            <PerspectiveCamera makeDefault position={[0, -1, 0]}  />
+            <PerspectiveCamera makeDefault position={[0, -1, 0]} />
 
             {/* Camera controls*/}
             <OrbitControls
               disabled
-              enableZoom={movement}
-              enableRotate={movement}
+              enableZoom={snap.allowMovement}
+              enableRotate={snap.allowMovement}
               minDistance={4}
               maxDistance={6}
               enablePan={false}
@@ -37,8 +45,13 @@ function App() {
             />
             <Environment preset="city" />
 
-            <Laptop allowMovement={(movement) => allowMovement(movement)}  />
-            <ContactShadows position={[0, -1, 0]} opacity={1} width={5} height={5} />
+            <Laptop />
+            <ContactShadows
+              position={[0, -1, 0]}
+              opacity={1}
+              width={5}
+              height={5}
+            />
           </Suspense>
         </Canvas>
       </section>

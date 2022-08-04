@@ -8,20 +8,21 @@ title: Macbook Pro 13 inch 2020
 import React, { useEffect, useRef, useState } from "react";
 import { useGLTF } from "@react-three/drei";
 import LaptopScreenComponent from "./laptop-screen.component";
+import { state } from "../../App";
 
-export default function Laptop(props) {
+export default function Laptop() {
+
+  // References to the whole model and top panel
   const group = useRef();
   const topPanelRef = useRef();
 
-  const [xRotation, setXRotation] = useState(0);
-
-  const [screen, turnOnScreen]=  useState(false)
-
-
+  // GLTF model
   const { nodes, materials } = useGLTF(
     "/assets/models/laptop/scene.gltf"
   );
 
+  // Hooks for rotating the top panel
+  const [xRotation, setXRotation] = useState(0);
   const [hovered, setHovered] = useState(false);
 
   window.addEventListener("wheel", () => {
@@ -34,15 +35,10 @@ export default function Laptop(props) {
 
   useEffect(() => {
     if (xRotation === -1.5500000000000007) {
-      
-      turnOnScreen(true);
+      state.screenTurnedOn = true;
     }
   }, [xRotation]);
 
-  const [movement, allowMovement] = useState(false);
-
-  props.allowMovement(movement)
-  
   return (
     <group
       ref={group}
@@ -96,7 +92,7 @@ export default function Laptop(props) {
                   geometry={nodes.Object_6.geometry}
                   material={materials.Glass}
                 />
-                <LaptopScreenComponent screenTurnedOn={screen} allowMovement={(movement) => allowMovement(movement)}/>
+                <LaptopScreenComponent />
                 {/*
                   Screen image
                   <mesh
