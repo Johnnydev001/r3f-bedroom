@@ -3,7 +3,6 @@ import React, { useEffect, useState } from "react";
 import CarStandFooterComponent from "../carstand/footer/footer";
 import CarStandHeroComponent from "../carstand/hero/hero";
 import CarStandNavbarComponent from "../carstand/navbar/navbar";
-import CarStandTopCarsComponent from "../carstand/topcars/top-cars";
 import simpsons from "/assets/video/simpsons.mp4";
 import styles from "../../../src/styles/laptop/laptop-screen.module.scss";
 import { sRGBEncoding } from "three";
