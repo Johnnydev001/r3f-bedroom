@@ -6,14 +6,14 @@ source: https://sketchfab.com/3d-models/macbook-pro-13-inch-2020-efab224280fd4c3
 title: Macbook Pro 13 inch 2020
 */
 import React, { useEffect, useRef, useState } from "react";
-import { useGLTF } from "@react-three/drei";
+import { TransformControls, useGLTF } from "@react-three/drei";
 import LaptopScreenComponent from "./laptop-screen.component";
 import { state } from "../../App";
-
+import { Physics, usePlane, useBox } from '@react-three/cannon'
 export default function Laptop() {
 
   // References to the whole model and top panel
-  const group = useRef();
+  const [group] = useBox(() => ({ mass: 50, position: [0, 1, 0] }))
   const topPanelRef = useRef();
 
   // GLTF model
@@ -40,7 +40,10 @@ export default function Laptop() {
   }, [xRotation]);
 
   return (
+
+
     <group
+    
       ref={group}
       dispose={null}
       scale={8}

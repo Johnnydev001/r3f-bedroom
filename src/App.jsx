@@ -10,6 +10,7 @@ import { Suspense } from "react";
 import { Canvas } from "@react-three/fiber";
 import Laptop from "./components/laptop/laptop.component";
 import { proxy, useSnapshot } from "valtio";
+import { Physics, usePlane } from "@react-three/cannon";
 
 // Constant for handling with state changes
 export const state = proxy({
@@ -17,6 +18,16 @@ export const state = proxy({
   allowMovement: false,
   displayEpisode: false,
 });
+
+function Plane(props) {
+  const [ref] = usePlane(() => ({ rotation: [-Math.PI / 2, 0, 0], position: [0,-1,0]}))
+  return (
+    <mesh receiveShadow ref={ref}>
+      <planeGeometry args={[1000, 1000]} />
+      <meshPhongMaterial  transparent opacity={0.01}/>
+    </mesh>
+  )
+}
 
 function App() {
 
@@ -30,28 +41,25 @@ function App() {
       <section className={styles.canvas_container}>
         <Canvas dpr={[1, 2]}>
           <Suspense fallback={"Loading world..."}>
-            <PerspectiveCamera makeDefault position={[0, -1, 0]} />
-
+          
+            <PerspectiveCamera makeDefault position={[0, -2, 0]} />
+            <Environment preset="warehouse"/>
             {/* Camera controls*/}
             <OrbitControls
               disabled
               enableZoom={snap.allowMovement}
               enableRotate={snap.allowMovement}
-              minDistance={3.1}
+              minDistance={4}
               maxDistance={6}
               enablePan={false}
               rotateSpeed={0.7}
               maxPolarAngle={1.2}
             />
-            <Environment preset="city" />
-
-            <Laptop />
-            <ContactShadows
-              position={[0, -1, 0]}
-              opacity={1}
-              width={5}
-              height={5}
-            />
+            <Physics>
+              <Laptop />
+              <Plane/>
+            </Physics> 
+            
           </Suspense>
         </Canvas>
       </section>
