@@ -6,4 +6,7 @@ The model itself is a laptop that when we scroll down it opens and displays the 
 
 A small easter egg is hidden in the navigation bar links. Look for it!
 
+Feel free to use and adapt this project to your needs.
+Don't forget to support my work and mention it.
+
 ![Screenshot](public/assets/imgs/screenshot.png)
