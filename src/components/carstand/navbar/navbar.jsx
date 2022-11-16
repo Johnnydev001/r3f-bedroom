@@ -1,25 +1,14 @@
 import styles from "../../../styles/carstand/navbar/navbar.module.scss";
 import home from "/assets/carstand/icons/home.png";
-import english from "/assets/carstand/icons/english.png";
 import { state } from "../../../App";
 
 export default function CarStandNavbarComponent() {
   return (
     <nav className={styles.container}>
-      <div className={styles.logo} onClick={() => state.displayEpisode = true}>
-        LOGO
-      </div>
+      <div className={styles.logo}>LOGO</div>
 
       <div className={styles.page_links}>
         <ul className={styles.links}>
-          <li className={styles.link}>
-            <img
-              data-name="home"
-              className={styles.home}
-              src={home}
-              alt="Home"
-            />
-          </li>
           <li className={styles.link} data-name="vehicles">
             VEHICLES
           </li>
@@ -29,8 +18,13 @@ export default function CarStandNavbarComponent() {
           <li className={styles.link} data-name="contact">
             CONTACT
           </li>
-          <li className={styles.link} data-name="language">
-            <img className={styles.english} src={english} alt="Language" />
+          <li className={styles.link} data-name="promotion">
+            <button
+              onClick={() => (state.displayPromotion = true)}
+              className={styles.promotion_btn}
+            >
+              Promotion
+            </button>
           </li>
         </ul>
       </div>

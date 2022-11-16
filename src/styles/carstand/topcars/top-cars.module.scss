@@ -1,20 +1,17 @@
 .container {
-
   text-align: center;
 
   .headings_container {
-
     .main_title {
       font-size: 3em;
       font-weight: bold;
     }
-  
+
     .sub_title {
       font-size: 2em;
       font-weight: lighter;
     }
   }
-
 
   .cars_container {
     margin-top: 3em;
@@ -30,6 +27,11 @@
         object-fit: cover;
         width: 80%;
         max-width: 100%;
+      }
+
+      .car_picture:hover {
+        scale: 1.2;
+        transition: scale ease-in-out 100ms;
       }
 
       .car_container {

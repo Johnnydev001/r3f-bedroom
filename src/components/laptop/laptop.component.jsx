@@ -9,17 +9,14 @@ import React, { useEffect, useRef, useState } from "react";
 import { TransformControls, useGLTF } from "@react-three/drei";
 import LaptopScreenComponent from "./laptop-screen.component";
 import { state } from "../../App";
-import { Physics, usePlane, useBox } from '@react-three/cannon'
+import { Physics, usePlane, useBox } from "@react-three/cannon";
 export default function Laptop() {
-
   // References to the whole model and top panel
-  const [group] = useBox(() => ({ mass: 50, position: [0, 1, 0] }))
+  const [group] = useBox(() => ({ mass: 50, position: [0, 1, 0] }));
   const topPanelRef = useRef();
 
   // GLTF model
-  const { nodes, materials } = useGLTF(
-    "/assets/models/laptop/scene.gltf"
-  );
+  const { nodes, materials } = useGLTF("/assets/models/laptop/scene.gltf");
 
   // Hooks for rotating the top panel
   const [xRotation, setXRotation] = useState(0);
@@ -40,15 +37,12 @@ export default function Laptop() {
   }, [xRotation]);
 
   return (
-
-
     <group
-    
       ref={group}
       dispose={null}
       scale={8}
-      position={[0, -0.75, 0]}
-      onPointerOver={() => (setHovered(true))}
+      position={[0, 0, 0]}
+      onPointerOver={() => setHovered(true)}
       onPointerOut={() => setHovered(false)}
     >
       <group name="Sketchfab_Scene">

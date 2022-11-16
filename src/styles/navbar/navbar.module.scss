@@ -4,23 +4,29 @@
   justify-items: right;
   padding: 2em 4em 0 0;
   position: fixed;
-  
+
   overflow: hidden;
   z-index: 1;
   width: 100%;
 
   .page_links {
-    display: flex;
-
     .links {
       list-style: none;
-      display: flex;
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
       gap: 4em;
       font-weight: lighter;
 
+      .link {
+        color: #fff;
+        text-align: center;
+      }
+
       .link:hover {
-        text-decoration: underline;
         cursor: pointer;
+        background-color: rgb(65, 35, 82);
+        padding: 0.25em;
+        border-radius: 0.5em;
       }
     }
   }

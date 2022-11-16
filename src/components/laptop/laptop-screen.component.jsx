@@ -2,22 +2,22 @@ import { Html } from "@react-three/drei";
 import React, { useEffect, useState } from "react";
 import CarStandFooterComponent from "../carstand/footer/footer";
 import CarStandHeroComponent from "../carstand/hero/hero";
+import CarStandTopCarsComponent from "../carstand/topcars/topcars";
 import CarStandNavbarComponent from "../carstand/navbar/navbar";
-import simpsons from "/assets/video/simpsons.mp4";
+import promotion from "/assets/video/promotion_video.mp4";
 import styles from "../../../src/styles/laptop/laptop-screen.module.scss";
 import { sRGBEncoding } from "three";
 import { state } from "../../App";
 import { useSnapshot } from "valtio";
 
 export default function LaptopScreenComponent() {
-
   // Hook for acessing the state data
   const snap = useSnapshot(state);
 
   // Simpsons video to be displayed on the screen
   const [video] = useState(() => {
     const vid = document.createElement("video");
-    vid.src = simpsons;
+    vid.src = promotion;
     vid.loop = true;
     vid.muted = true;
     vid.play();
@@ -26,15 +26,18 @@ export default function LaptopScreenComponent() {
 
   // Allow rotation/zoom when the video is playing
   useEffect(() => {
-    if (snap.displayEpisode) {
+    if (snap.displayPromotion) {
       state.allowMovement = true;
     }
   });
-
   return (
-    <mesh rotation={[1.565, 0, 0]} position={[0, 0, 0.4]}>
+    <mesh
+      rotation={[1.565, 0, 0]}
+      position={[0, 0, 0.4]}
+      onClick={() => (state.displayPromotion = !state.displayPromotion)}
+    >
       <planeGeometry args={[1.05, 0.7]} />
-      {snap.screenTurnedOn && snap.displayEpisode && (
+      {snap.screenTurnedOn && snap.displayPromotion && (
         <meshStandardMaterial emissive={"white"}>
           <videoTexture attach="map" args={[video]} encoding={sRGBEncoding} />
           <videoTexture
@@ -44,7 +47,7 @@ export default function LaptopScreenComponent() {
           />
         </meshStandardMaterial>
       )}
-      {snap.screenTurnedOn && !snap.displayEpisode && (
+      {snap.screenTurnedOn && !snap.displayPromotion && (
         <Html
           className={styles.container}
           transform
@@ -55,7 +58,7 @@ export default function LaptopScreenComponent() {
           <div className={styles.sub_container}>
             <CarStandNavbarComponent />
             <CarStandHeroComponent />
-            {/*<CarStandTopCarsComponent />*/}
+            <CarStandTopCarsComponent />
             <CarStandFooterComponent />
           </div>
         </Html>

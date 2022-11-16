@@ -9,11 +9,11 @@
   overflow-y: scroll;
 
   .sub_container {
-    max-height: 30px;
+    max-height: 35px;
     text-align: center;
-    transform: scale(0.045);
+    transform: scale(0.04);
     transform-origin: top center;
-
+    scrollbar-width: thin;
   }
 }
 
@@ -23,8 +23,9 @@
 }
 ::-webkit-scrollbar-track-piece {
   background: black;
+  height: 1px;
 }
 ::-webkit-scrollbar-thumb {
-  background: #006eff;
+  background: #7e7e7e;
   height: 1px;
 }

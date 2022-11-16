@@ -5,7 +5,6 @@ import whatsapp from "/assets/carstand/icons/whatsapp.png";
 import instagram from "/assets/carstand/icons/instagram.png";
 
 export default function CarStandFooterComponent() {
-
   return (
     <section className={styles.container}>
       <section className={styles.sub_container}>
@@ -24,9 +23,13 @@ export default function CarStandFooterComponent() {
       <section className={styles.sub_container}>
         <h1>Social media</h1>
         <div className={styles.social_media_container}>
-          <img className={styles.social_media} src={facebook} alt="Facebook"/>
+          <img className={styles.social_media} src={facebook} alt="Facebook" />
           <img className={styles.social_media} src={whatsapp} alt="Whats App" />
-          <img className={styles.social_media} src={instagram} alt="Instagram"/>
+          <img
+            className={styles.social_media}
+            src={instagram}
+            alt="Instagram"
+          />
         </div>
       </section>
     </section>
