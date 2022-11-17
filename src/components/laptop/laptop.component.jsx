@@ -30,12 +30,6 @@ export default function Laptop() {
     }
   });
 
-  useEffect(() => {
-    if (xRotation === -1.5500000000000007) {
-      state.screenTurnedOn = true;
-    }
-  }, [xRotation]);
-
   return (
     <group
       ref={group}

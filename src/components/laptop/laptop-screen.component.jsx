@@ -24,20 +24,14 @@ export default function LaptopScreenComponent() {
     return vid;
   });
 
-  // Allow rotation/zoom when the video is playing
-  useEffect(() => {
-    if (snap.displayPromotion) {
-      state.allowMovement = true;
-    }
-  });
   return (
     <mesh
-      rotation={[1.565, 0, 0]}
-      position={[0, 0, 0.4]}
+      rotation={[0, Math.PI / 2, 0]}
+      position={[0, 0, 0]}
       onClick={() => (state.displayPromotion = !state.displayPromotion)}
     >
-      <planeGeometry args={[1.05, 0.7]} />
-      {snap.screenTurnedOn && snap.displayPromotion && (
+      <planeGeometry args={[1.5, 1]} />
+      {snap.displayPromotion && (
         <meshStandardMaterial emissive={"white"}>
           <videoTexture attach="map" args={[video]} encoding={sRGBEncoding} />
           <videoTexture
@@ -47,7 +41,8 @@ export default function LaptopScreenComponent() {
           />
         </meshStandardMaterial>
       )}
-      {snap.screenTurnedOn && !snap.displayPromotion && (
+
+      {!snap.displayPromotion && (
         <Html
           className={styles.container}
           transform

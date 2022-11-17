@@ -1,6 +1,6 @@
 .container {
-  max-width: 42px;
-  max-height: 28px;
+  max-width: 60px;
+  max-height: 40px;
   text-align: center;
   display: grid;
   justify-items: center;
@@ -11,7 +11,7 @@
   .sub_container {
     max-height: 35px;
     text-align: center;
-    transform: scale(0.04);
+    transform: scale(0.055);
     transform-origin: top center;
     scrollbar-width: thin;
   }
