@@ -7,7 +7,8 @@ import { useGLTF, useAnimations } from "@react-three/drei";
 import { useEffect } from "react";
 import LaptopScreenComponent from "../../../../src/components/laptop/laptop-screen.component";
 import { Html } from "@react-three/drei";
-import CarStandNavbarComponent from "../../../../src/components/carstand/navbar/navbar";
+
+import styles from "../../../../src/styles/laptop/laptop-screen.module.scss";
 export default function Desktop({ ...props }) {
   const group = useRef();
   const { nodes, materials, animations } = useGLTF(
@@ -343,12 +344,29 @@ export default function Desktop({ ...props }) {
                   material={materials.Glass}
                 />
 
-                <mesh rotation={[Math.PI / 2, 0, 0]} position={[0, -2, 0]}>
-                  <planeGeometry args={[1, 0.5]} />
-                  <Html transform position={[0, 0, 0.000001]} occlude center>
-                    <div>
-                      <CarStandNavbarComponent />
-                    </div>
+                <mesh rotation={[Math.PI / 2, 0, 0]} position={[0, 0, 0.38]}>
+                  <planeGeometry args={[1, 0.65]} />
+                  <Html
+                    transform
+                    position={[0, 0, 0.000001]}
+                    occlude
+                    center
+                    scale={[0.02, 0.025, 0.1]}
+                    style={{
+                      display: "grid",
+                      justifyItems: "center",
+                      padding: "0",
+                      margin: "0",
+                    }}
+                  >
+                    <iframe
+                      style={{ scrollbarWidth: "none", overflow: "hidden" }}
+                      width={"2000"}
+                      height={"1080"}
+                      src="https://joao-dev.netlify.app/"
+                      frameborder="0"
+                      allowfullscreen
+                    ></iframe>
                   </Html>
                 </mesh>
                 {/* <mesh

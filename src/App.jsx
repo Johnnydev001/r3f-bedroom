@@ -26,7 +26,6 @@ function App() {
       <section className={styles.canvas_container}>
         <Canvas dpr={[1, 2]}>
           <Suspense fallback={"Loading world..."}>
-            <color attach="background" args={["rgb(20, 0, 32)"]} />
             <PerspectiveCamera makeDefault position={[3, 1, 0]} />
             <Environment preset="night" />
 
