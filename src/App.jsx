@@ -5,12 +5,12 @@ import {
   OrbitControls,
   PerspectiveCamera,
   Environment,
-  Stage,
+  SpotLight,
 } from "@react-three/drei";
 import { Suspense } from "react";
-import { Canvas } from "@react-three/fiber";
+import { Canvas, useFrame } from "@react-three/fiber";
 import { proxy, useSnapshot } from "valtio";
-import Desktop from "../public/assets/models/desktop/Desktop";
+import Desktop from "./components/desktop/Desktop";
 import {
   EffectComposer,
   DepthOfField,
@@ -18,38 +18,42 @@ import {
   Noise,
   Vignette,
 } from "@react-three/postprocessing";
-
 // Constant for handling with state changes
 export const state = proxy({
   displayPromotion: false,
 });
 
 function App() {
-  // Hook for acessing the state data
-  const snap = useSnapshot(state);
-
   return (
     <section className={styles.container}>
       <section className={styles.canvas_container}>
         <Canvas dpr={[1, 2]}>
-          <color attach="background" args={["#101010"]} />
-          <fog attach={"fog"} args={["black", 4, 3]} />
+          <color attach={"background"} args={["#202020"]} />
           <Suspense fallback={"Loading world..."}>
-            <PerspectiveCamera makeDefault position={[3, 0, 0]} />
-            <Environment preset="night" />
+            <PerspectiveCamera makeDefault position={[3, 0, 0]} zoom={1.3} />
 
             <OrbitControls
               disabled
               enablePan={true}
               rotateSpeed={0.7}
-              maxPolarAngle={1.2}
               maxAzimuthAngle={0.5}
+              minPolarAngle={0}
+              maxPolarAngle={Math.PI / 2}
+              maxDistance={3.6}
             />
 
-            <EffectComposer>
-              <Vignette eskil={false} offset={1} darkness={0.4} />
-              <Noise opacity={0.1} premultiply />
+            <ambientLight color={"blue"} intensity={0.05} />
+            <ambientLight color={"white"} intensity={0.008} />
 
+            <EffectComposer>
+              <Vignette eskil={false} offset={0.1} darkness={1} />
+
+              <Bloom
+                luminanceThreshold={5}
+                luminanceSmoothing={5}
+                height={100}
+              />
+              <Noise opacity={0.02} />
               <Desktop />
             </EffectComposer>
           </Suspense>
