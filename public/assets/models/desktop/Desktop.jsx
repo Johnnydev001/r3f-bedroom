@@ -20,7 +20,14 @@ export default function Desktop({ ...props }) {
     Object.entries(actions)[57][1].play();
   }, [actions]);
   return (
-    <group ref={group} {...props} dispose={null}>
+    <group
+      ref={group}
+      {...props}
+      dispose={null}
+      scale={0.4}
+      position={[0, -0.8, 0.25]}
+      rotation={[0, 0.7, 0]}
+    >
       <group name="Scene">
         <group name="Sketchfab_model" rotation={[-Math.PI / 2, 0, 0]}>
           <group name="root">
@@ -352,20 +359,14 @@ export default function Desktop({ ...props }) {
                     occlude
                     center
                     scale={[0.02, 0.025, 0.1]}
-                    style={{
-                      display: "grid",
-                      justifyItems: "center",
-                      padding: "0",
-                      margin: "0",
-                    }}
                   >
                     <iframe
-                      style={{ scrollbarWidth: "none", overflow: "hidden" }}
-                      width={"2000"}
-                      height={"1080"}
-                      src="https://joao-dev.netlify.app/"
+                      width={"2010"}
+                      height={"1050"}
+                      src="https://curvefever.pro/"
                       frameborder="0"
                       allowfullscreen
+                      allow="autoplay"
                     ></iframe>
                   </Html>
                 </mesh>

@@ -5,12 +5,19 @@ import {
   OrbitControls,
   PerspectiveCamera,
   Environment,
-  Backdrop,
+  Stage,
 } from "@react-three/drei";
 import { Suspense } from "react";
 import { Canvas } from "@react-three/fiber";
 import { proxy, useSnapshot } from "valtio";
 import Desktop from "../public/assets/models/desktop/Desktop";
+import {
+  EffectComposer,
+  DepthOfField,
+  Bloom,
+  Noise,
+  Vignette,
+} from "@react-three/postprocessing";
 
 // Constant for handling with state changes
 export const state = proxy({
@@ -25,8 +32,10 @@ function App() {
     <section className={styles.container}>
       <section className={styles.canvas_container}>
         <Canvas dpr={[1, 2]}>
+          <color attach="background" args={["#101010"]} />
+          <fog attach={"fog"} args={["black", 4, 3]} />
           <Suspense fallback={"Loading world..."}>
-            <PerspectiveCamera makeDefault position={[3, 1, 0]} />
+            <PerspectiveCamera makeDefault position={[3, 0, 0]} />
             <Environment preset="night" />
 
             <OrbitControls
@@ -34,8 +43,15 @@ function App() {
               enablePan={true}
               rotateSpeed={0.7}
               maxPolarAngle={1.2}
+              maxAzimuthAngle={0.5}
             />
-            <Desktop />
+
+            <EffectComposer>
+              <Vignette eskil={false} offset={1} darkness={0.4} />
+              <Noise opacity={0.1} premultiply />
+
+              <Desktop />
+            </EffectComposer>
           </Suspense>
         </Canvas>
       </section>

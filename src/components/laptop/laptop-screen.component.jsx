@@ -49,6 +49,7 @@ export default function LaptopScreenComponent() {
           position={[0, 0, 0.000001]}
           occlude
           center
+          scale={[0.0345, 0.021, 100]}
         >
           <div className={styles.sub_container}>
             <CarStandNavbarComponent />
