@@ -5,11 +5,10 @@ license: CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)
 source: https://sketchfab.com/3d-models/macbook-pro-13-inch-2020-efab224280fd4c3993c808107f7c0b38
 title: Macbook Pro 13 inch 2020
 */
-import React, { useEffect, useRef, useState } from "react";
-import { TransformControls, useGLTF } from "@react-three/drei";
+import React, { useRef, useState } from "react";
+import { useGLTF } from "@react-three/drei";
 import LaptopScreenComponent from "./laptop-screen.component";
-import { state } from "../../App";
-import { Physics, usePlane, useBox } from "@react-three/cannon";
+import { useBox } from "@react-three/cannon";
 export default function Laptop() {
   // References to the whole model and top panel
   const [group] = useBox(() => ({ mass: 50, position: [0, 1, 0] }));
@@ -84,13 +83,7 @@ export default function Laptop() {
                   material={materials.Glass}
                 />
                 <LaptopScreenComponent />
-                {/*
-                  Screen image
-                  <mesh
-                  name="Object_7"
-                  geometry={nodes.Object_7.geometry}
-                  material={materials["Material.002"]}
-                /> */}
+
                 <mesh
                   name="Object_8"
                   geometry={nodes.Object_8.geometry}

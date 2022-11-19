@@ -1,5 +1,5 @@
 import { Html } from "@react-three/drei";
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import CarStandFooterComponent from "../carstand/footer/footer";
 import CarStandHeroComponent from "../carstand/hero/hero";
 import CarStandTopCarsComponent from "../carstand/topcars/topcars";

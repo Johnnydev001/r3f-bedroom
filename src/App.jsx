@@ -1,23 +1,23 @@
 import styles from "./styles/app/app.module.scss";
 import {
-  ContactShadows,
-  MeshReflectorMaterial,
   OrbitControls,
   PerspectiveCamera,
   Environment,
-  SpotLight,
 } from "@react-three/drei";
 import { Suspense } from "react";
-import { Canvas, useFrame } from "@react-three/fiber";
-import { proxy, useSnapshot } from "valtio";
+import { Canvas } from "@react-three/fiber";
+import { proxy } from "valtio";
 import Desktop from "./components/desktop/Desktop";
 import {
   EffectComposer,
-  DepthOfField,
+  HueSaturation,
   Bloom,
   Noise,
   Vignette,
+  ToneMapping,
+  SSR,
 } from "@react-three/postprocessing";
+
 // Constant for handling with state changes
 export const state = proxy({
   displayPromotion: false,
@@ -27,33 +27,42 @@ function App() {
   return (
     <section className={styles.container}>
       <section className={styles.canvas_container}>
-        <Canvas dpr={[1, 2]}>
+        <Canvas shadows dpr={[1, 2]} colorManagement>
           <color attach={"background"} args={["#202020"]} />
           <Suspense fallback={"Loading world..."}>
-            <PerspectiveCamera makeDefault position={[3, 0, 0]} zoom={1.3} />
-
+            <PerspectiveCamera makeDefault position={[3, 0, 0]} zoom={1.2} />
+            <Environment preset="night" background />
             <OrbitControls
               disabled
               enablePan={true}
               rotateSpeed={0.7}
-              maxAzimuthAngle={0.5}
+              maxAzimuthAngle={Math.PI / 2}
               minPolarAngle={0}
               maxPolarAngle={Math.PI / 2}
-              maxDistance={3.6}
+              maxDistance={3.8}
+              panSpeed={1.2}
+              zoomSpeed={3}
             />
-
-            <ambientLight color={"blue"} intensity={0.05} />
-            <ambientLight color={"white"} intensity={0.008} />
 
             <EffectComposer>
               <Vignette eskil={false} offset={0.1} darkness={1} />
 
               <Bloom
-                luminanceThreshold={5}
-                luminanceSmoothing={5}
+                luminanceThreshold={0.1}
+                luminanceSmoothing={8}
                 height={100}
               />
-              <Noise opacity={0.02} />
+              <Noise opacity={0.01} />
+              <HueSaturation saturation={0.3} />
+              <ToneMapping
+                adaptive={true}
+                resolution={2048}
+                middleGrey={1.5}
+                maxLuminance={5.0}
+                averageLuminance={5.0}
+              />
+              <SSR intensity={0.05} />
+
               <Desktop />
             </EffectComposer>
           </Suspense>
