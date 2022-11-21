@@ -22,7 +22,7 @@ export default function Desktop({ ...props }) {
   const lightRef = useRef();
   useFrame(() => {
     lightRef.current.position.lerp(new Vector3().set(10, 9, 5.5), 0.5);
-    lightRef.current.target.position.lerp(new Vector3().set(1, -1, 0), 0.5);
+    lightRef.current.target.position.lerp(new Vector3().set(1, 0, 0), 0.5);
     lightRef.current.target.updateMatrixWorld();
   });
 
@@ -42,8 +42,12 @@ export default function Desktop({ ...props }) {
       <SpotLight
         ref={lightRef}
         castShadow
-        shadow-mapSize={[1024, 1024]}
-        shadow-bias={-0.000001}
+        shadow-camera-near={0.1}
+        shadow-camera-far={20}
+        shadow-camera-left={-10}
+        shadow-camera-right={10}
+        shadow-camera-top={10}
+        shadow-camera-bottom={-10}
         penumbra={1}
         distance={8}
         angle={0.7}
@@ -51,13 +55,15 @@ export default function Desktop({ ...props }) {
         intensity={turnLightOn ? 2.5 : 0}
         color={"#f7f0dc"}
       />
+
+      <directionalLight
+        color={"blue"}
+        intensity={turnLightOn ? 0 : 0.3}
+        position={[3, 5, 0]}
+        castShadow
+      />
       <group name="Scene">
-        <group
-          castShadow
-          receiveShadow
-          name="Sketchfab_model"
-          rotation={[-Math.PI / 2, 0, 0]}
-        >
+        <group name="Sketchfab_model" rotation={[-Math.PI / 2, 0, 0]}>
           <group name="root">
             <group name="GLTF_SceneRootNode" rotation={[Math.PI / 2, 0, 0]}>
               <group
@@ -66,6 +72,8 @@ export default function Desktop({ ...props }) {
                 scale={1.2}
               >
                 <mesh
+                  castShadow
+                  receiveShadow
                   name="Object_23"
                   geometry={nodes.Object_23.geometry}
                   material={materials.negro}
@@ -77,11 +85,15 @@ export default function Desktop({ ...props }) {
                 scale={0.12}
               >
                 <mesh
+                  castShadow
+                  receiveShadow
                   name="Object_25"
                   geometry={nodes.Object_25.geometry}
                   material={materials["Material.001"]}
                 />
                 <mesh
+                  castShadow
+                  receiveShadow
                   name="Object_26"
                   geometry={nodes.Object_26.geometry}
                   material={materials["Material.002"]}
@@ -89,11 +101,15 @@ export default function Desktop({ ...props }) {
               </group>
               <group name="Cama_4" position={[-1.05, -0.69, 1.15]} scale={1.42}>
                 <mesh
+                  castShadow
+                  receiveShadow
                   name="Object_16"
                   geometry={nodes.Object_16.geometry}
                   material={materials.base_cama}
                 />
                 <mesh
+                  castShadow
+                  receiveShadow
                   name="Object_17"
                   geometry={nodes.Object_17.geometry}
                   material={materials.colchon}
@@ -106,6 +122,8 @@ export default function Desktop({ ...props }) {
                 scale={[1.2, 1.6, 1.2]}
               >
                 <mesh
+                  castShadow
+                  receiveShadow
                   name="Object_19"
                   geometry={nodes.Object_19.geometry}
                   material={materials.sabanas}
@@ -117,6 +135,8 @@ export default function Desktop({ ...props }) {
                 scale={[1.2, 0.09, 0.45]}
               >
                 <mesh
+                  castShadow
+                  receiveShadow
                   name="Object_52"
                   geometry={nodes.Object_52.geometry}
                   material={materials.base_cama}
@@ -128,11 +148,13 @@ export default function Desktop({ ...props }) {
                 scale={4.82}
               >
                 <mesh
+                  receiveShadow
                   name="Object_4"
                   geometry={nodes.Object_4.geometry}
                   material={materials.pared}
                 />
                 <mesh
+                  receiveShadow
                   name="Object_5"
                   geometry={nodes.Object_5.geometry}
                   material={materials.suelo}
@@ -148,24 +170,26 @@ export default function Desktop({ ...props }) {
                   material={materials.puerta}
                 />
                 <mesh
+                  receiveShadow
                   name="Object_8"
                   geometry={nodes.Object_8.geometry}
                   material={materials.negro}
                 />
               </group>
               <group
-                castShadow
                 name="Lampara_26"
                 position={[0.25, 1.03, -3.31]}
                 scale={[0.32, 0.04, 0.32]}
                 onClick={() => setTurnLightOn(!turnLightOn)}
               >
                 <mesh
+                  castShadow
                   name="Object_49"
                   geometry={nodes.Object_49.geometry}
                   material={materials.lamapra}
                 />
                 <mesh
+                  castShadow
                   name="Object_50"
                   geometry={nodes.Object_50.geometry}
                   material={materials.negro}
@@ -178,11 +202,15 @@ export default function Desktop({ ...props }) {
                 scale={[0.09, 0.43, 0.3]}
               >
                 <mesh
+                  castShadow
+                  receiveShadow
                   name="Object_54"
                   geometry={nodes.Object_54.geometry}
                   material={materials.pages}
                 />
                 <mesh
+                  castShadow
+                  receiveShadow
                   name="Object_55"
                   geometry={nodes.Object_55.geometry}
                   material={materials.libro}
@@ -194,11 +222,15 @@ export default function Desktop({ ...props }) {
                 scale={[-0.3, -0.03, -0.03]}
               >
                 <mesh
+                  castShadow
+                  receiveShadow
                   name="Object_46"
                   geometry={nodes.Object_46.geometry}
                   material={materials.base_cama}
                 />
                 <mesh
+                  castShadow
+                  receiveShadow
                   name="Object_47"
                   geometry={nodes.Object_47.geometry}
                   material={materials.gris}
@@ -210,6 +242,8 @@ export default function Desktop({ ...props }) {
                 scale={[1.2, 0.12, 1.2]}
               >
                 <mesh
+                  castShadow
+                  receiveShadow
                   name="Object_28"
                   geometry={nodes.Object_28.geometry}
                   material={materials.base_cama}
@@ -223,23 +257,28 @@ export default function Desktop({ ...props }) {
                 scale={0.08}
               >
                 <mesh
+                  castShadow
+                  receiveShadow
                   name="Object_30"
                   geometry={nodes.Object_30.geometry}
                   material={materials.negro}
                 />
                 <mesh
+                  castShadow
+                  receiveShadow
                   name="Object_31"
                   geometry={nodes.Object_31.geometry}
                   material={materials.pcinsidenormal}
                 />
               </group>
               <group
-                castShadow
                 name="Pantalla_20"
                 position={[-3.78, 2.47, -1.13]}
                 scale={1.46}
               >
                 <mesh
+                  receiveShadow
+                  castShadow
                   name="Object_33"
                   geometry={nodes.Object_33.geometry}
                   material={materials.negro}
@@ -257,6 +296,8 @@ export default function Desktop({ ...props }) {
                 scale={0.39}
               >
                 <mesh
+                  castShadow
+                  receiveShadow
                   name="Object_14"
                   geometry={nodes.Object_14.geometry}
                   material={materials.negro}
@@ -276,6 +317,8 @@ export default function Desktop({ ...props }) {
                 scale={0.11}
               >
                 <mesh
+                  castShadow
+                  receiveShadow
                   name="Object_44"
                   geometry={nodes.Object_44.geometry}
                   material={materials.gris}
@@ -288,11 +331,15 @@ export default function Desktop({ ...props }) {
                 scale={[0.14, 0.04, 0.08]}
               >
                 <mesh
+                  castShadow
+                  receiveShadow
                   name="Object_36"
                   geometry={nodes.Object_36.geometry}
                   material={materials.negro}
                 />
                 <mesh
+                  castShadow
+                  receiveShadow
                   name="Object_37"
                   geometry={nodes.Object_37.geometry}
                   material={materials.light}
@@ -304,6 +351,8 @@ export default function Desktop({ ...props }) {
                 scale={[2.5, 1.2, 3.53]}
               >
                 <mesh
+                  castShadow
+                  receiveShadow
                   name="Object_21"
                   geometry={nodes.Object_21.geometry}
                   material={materials.sabanas}
@@ -316,6 +365,8 @@ export default function Desktop({ ...props }) {
                 scale={0.08}
               >
                 <mesh
+                  castShadow
+                  receiveShadow
                   name="Object_39"
                   geometry={nodes.Object_39.geometry}
                   material={materials.silla2}
@@ -341,7 +392,6 @@ export default function Desktop({ ...props }) {
           </group>
         </group>
         <group
-          castShadow
           onClick={() =>
             (Object.entries(actions)[57][1].paused =
               !Object.entries(actions)[57][1].paused)

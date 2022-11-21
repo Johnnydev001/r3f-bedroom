@@ -30,7 +30,7 @@ function App() {
         <Canvas shadows dpr={[1, 2]} colorManagement>
           <color attach={"background"} args={["#202020"]} />
           <Suspense fallback={"Loading world..."}>
-            <PerspectiveCamera makeDefault position={[3, 0, 0]} zoom={1.2} />
+            <PerspectiveCamera makeDefault position={[3, 0.5, 0]} zoom={1.2} />
             <Environment preset="night" background />
             <OrbitControls
               disabled
@@ -41,7 +41,7 @@ function App() {
               maxPolarAngle={Math.PI / 2}
               maxDistance={3.8}
               panSpeed={1.2}
-              zoomSpeed={3}
+              zoomSpeed={4}
             />
 
             <EffectComposer>
@@ -61,7 +61,7 @@ function App() {
                 maxLuminance={5.0}
                 averageLuminance={5.0}
               />
-              <SSR intensity={0.05} />
+              <SSR intensity={0.005} />
 
               <Desktop />
             </EffectComposer>
